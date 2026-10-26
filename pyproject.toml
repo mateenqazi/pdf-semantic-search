@@ -1,0 +1,34 @@
+[project]
+name = "pdf-semantic-search"
+version = "0.2.0"
+description = "Local PDF search with FastAPI, plus optional cited answers from OpenAI"
+requires-python = ">=3.12,<3.15"
+dependencies = [
+    "fastapi==0.162.0",
+    "fastembed==0.9.0",
+    "numpy==2.5.4",
+    "openai==3.37.0",
+    "pydantic==2.14.1",
+    "pypdf==6.21.2",
+    "python-multipart==0.0.32",
+    "tokenizers==0.23.3",
+    "uvicorn==0.54.0",
+]
+
+[dependency-groups]
+dev = ["httpx==0.28.1", "pytest==9.1.1", "reportlab==5.1.0", "ruff==0.17.2"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+markers = ["integration: downloads/runs the real embedding model (opt in)"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "ANN"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*.py" = ["ANN"]
